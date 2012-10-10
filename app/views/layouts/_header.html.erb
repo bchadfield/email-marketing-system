@@ -1,0 +1,20 @@
+   <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <%= link_to "Email Marketing System", root_path, class: "brand" %>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><%= link_to "Emails", emails_path %></li>
+              <li><%= link_to "Prospects", prospects_path %></li>
+              <li><%= link_to "Industries", industries_path %></li>
+              <li><%= link_to "Deliveries", deliveries_path %></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>

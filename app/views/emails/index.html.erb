@@ -1,0 +1,31 @@
+<% title "Emails" %>
+
+<h1 class="pull-left"><%= yield :heading %></h1>
+<%= link_to "Add email", new_email_path, class: "btn btn-success pull-right"%>
+
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Subject</th>
+      <th>Body</th>
+      <th>Variables</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @emails.each do |email| %>
+      <tr>
+        <td><%= link_to email.name, edit_email_path(email) %></td>
+        <td><%= truncate email.description, length: 30 %></td>
+        <td><%= truncate email.subject, length: 50 %></td>
+        <td class="fixed"><%= truncate email.body, length: 200 %></td>
+        <td>
+          <% email.email_variables.each do |email_variable| %>
+            <%= email_variable.identifier %>: <%= email_variable.content %><br />
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

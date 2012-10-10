@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  email_id: 1
+  identifier: MyString
+  content: MyText
+
+two:
+  email_id: 1
+  identifier: MyString
+  content: MyText

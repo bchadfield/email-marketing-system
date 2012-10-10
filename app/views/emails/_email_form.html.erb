@@ -1,0 +1,41 @@
+<h1><%= yield :heading %></h1>
+
+<%= nested_form_for @email do |f| %>
+  <div class="row">
+    <div class="well span6">
+      <%= f.label :name, "What is it called?" %>
+      <%= f.text_field :name, class: "span6" %>
+      <%= f.label :description, "How would you describe it?" %>
+      <%= f.text_field :description, class: "span6" %>
+      <%= f.label :subject, "What is the subject line?" %>
+      <%= f.text_field :subject, class: "span6" %>
+      <%= f.label :body, "What do you want to say?" %>
+      <%= f.text_area :body, class: "span6", rows: 10 %>
+    </div>
+    <div class="well span6">
+      <p>Available email variables</p>
+      <ul>
+        <li>CONTACT_NAME</li>
+        <li>COMPANY_NAME</li>
+        <li>INDUSTRY_NAME</li>
+        <li>COMPANY_WEBSITE</li>
+      </ul>
+      <p>Custom variables</p>
+      <%= f.fields_for :email_variables do |v| %>
+        <%= v.text_field :identifier, placeholder: "Key" %>
+        <%= v.text_field :content, placeholder: "Value" %>
+        <%= v.link_to_remove class: "btn btn-danger btn-close" do %>
+          <i class="icon-remove icon-white"></i>
+        <% end %>
+      <% end %>
+      <p><%= f.link_to_add "Add a variable", :email_variables, class: "btn btn-success" %></p>
+      <p>Both available and custom variables needed me surrounded by %% to be picked up. For example %%CONTACT_NAME%%</p>
+    </div>
+  </div>
+  
+  <div class="form-actions">
+    <%= link_to "Cancel", emails_path, class: "btn"%>
+    <%= f.submit "Save", class: "btn btn-primary"%>
+  </div>
+  
+<% end %>

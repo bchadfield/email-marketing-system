@@ -1,0 +1,20 @@
+<% title "Industries" %>
+
+<h1><%= yield :heading %></h1>
+<%= render "form" %>
+
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @industries.each do |industry| %>
+      <tr>
+        <td><%= link_to industry.name, edit_industry_path(industry) %></td>
+        <td><%= link_to "Delete", industry, class: "btn btn-small btn-danger pull-right", method: :delete %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
