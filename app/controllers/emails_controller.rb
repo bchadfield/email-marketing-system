@@ -12,7 +12,7 @@ class EmailsController < ApplicationController
   def create
     @email = Email.new(params[:email])
     if @email.save 
-      flash[:notice] = "Successfully created product."  
+      flash[:notice] = "Successfully created email."  
     end  
     respond_with(@email, location: edit_email_path(@email)) 
   end

@@ -1,4 +1,5 @@
 <%= form_for @industry do |f| %>
   <%= f.text_field :name, placeholder: "Industry" %>
-  <%= f.submit "Add", class: "btn btn-success" %>
+  <%= f.text_field :practitioners, placeholder: "Practitioners" %>
+  <%= f.submit "Save", class: "btn btn-success" %>
 <% end %>

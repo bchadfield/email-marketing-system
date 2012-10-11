@@ -37,7 +37,7 @@ class IndustriesController < ApplicationController
   def destroy
     @industry = Industry.find(params[:id])
     @industry.destroy  
-    flash[:notice] = "Successfully destroyed product."  
+    flash[:notice] = "Successfully destroyed industry."  
     respond_with(@industry, location: industries_path)
   end
 end

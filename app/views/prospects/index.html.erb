@@ -1,0 +1,29 @@
+<% title "Prospects" %>
+
+<h1><%= yield :heading %></h1>
+<%= render "form" %>
+
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Industry</th>
+      <th>Contact</th>
+      <th>Address</th>
+      <th>Email</th>
+      <th>Website</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @prospects.each do |prospect| %>
+      <tr>
+        <td><%= link_to prospect.company_name, edit_prospect_path(prospect) %></td>
+        <td><%= prospect.industry.name %></td>
+        <td><%= prospect.contact_name if prospect.contact_name %></td>
+        <td><%= prospect.address if prospect.address %></td>
+        <td><%= prospect.email if prospect.email %></td>
+        <td><%= prospect.website if prospect.website %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

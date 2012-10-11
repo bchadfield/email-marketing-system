@@ -1,0 +1,4 @@
+<%= form_tag prospects_path, method: :post, multipart: true do |f| %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Upload", class: "btn btn-success" %>
+<% end %>
