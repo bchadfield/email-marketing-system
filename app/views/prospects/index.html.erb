@@ -2,16 +2,21 @@
 
 <h1><%= yield :heading %></h1>
 <%= render "form" %>
+<%= form_tag prospects_path, method: 'get', class: "form-search pull-right" do %>
+    <%= text_field_tag :search, params[:search], class: "input-medium" %>
+    <%= submit_tag "Search", class: "btn" %>
+<% end %>
 
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
-      <th>Company</th>
+      <th><%= sortable "company_name", "Company" %></th>
       <th>Industry</th>
-      <th>Contact</th>
-      <th>Address</th>
-      <th>Email</th>
-      <th>Website</th>
+      <th><%= sortable "contact_name", "Contact" %></th>
+      <th><%= sortable "address" %></th>
+      <th><%= sortable "email" %></th>
+      <th><%= sortable "website" %></th>
+      <th>Emails sent</th>
     </tr>
   </thead>
   <tbody>
@@ -23,7 +28,14 @@
         <td><%= prospect.address if prospect.address %></td>
         <td><%= prospect.email if prospect.email %></td>
         <td><%= prospect.website if prospect.website %></td>
+        <td>
+            <% prospect.deliveries.each do |delivery| %>
+              <%= delivery.email.email %><br />
+            <% end %>
+          
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @prospects %>

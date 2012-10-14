@@ -23,6 +23,10 @@ end
 gem 'jquery-rails'
 
 gem "nested_form"
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+
+gem "letter_opener", :group => :development
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

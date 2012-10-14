@@ -44,4 +44,10 @@ form .btn { vertical-align: top; }
           border-radius: 10px;
 }
 
+th .current {  
+  text-indent: 14px;
+  background-repeat: no-repeat;   
+}  
+ 
+
 td.fixed { width: 35%; }

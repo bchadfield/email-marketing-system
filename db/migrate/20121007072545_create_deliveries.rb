@@ -1,8 +1,8 @@
 class CreateDeliveries < ActiveRecord::Migration
   def change
     create_table :deliveries do |t|
-      t.string :email_id
-      t.string :prospect_id
+      t.integer :email_id
+      t.integer :prospect_id
       t.string :token
 
       t.timestamps

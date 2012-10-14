@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(:version => 20121011092815) do
 
   create_table "deliveries", :force => true do |t|
-    t.string   "email_id"
-    t.string   "prospect_id"
+    t.integer  "email_id"
+    t.integer  "prospect_id"
     t.string   "token"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
