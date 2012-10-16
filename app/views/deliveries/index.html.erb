@@ -1,0 +1,28 @@
+<% title "Deliveries" %>
+
+<%= link_to "New delivery", new_delivery_path, class: "btn btn-success pull-right"%>
+<h1><%= yield :heading %></h1>
+<%= form_tag deliveries_path, method: 'get', class: "form-search pull-right" do %>
+    <%= text_field_tag :search, params[:search], class: "input-medium" %>
+    <%= submit_tag "Search", class: "btn" %>
+<% end %>
+
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th><%= sortable "email.name", "Email" %></th>
+      <th><%= sortable "prospect.company_name", "Prospect" %></th>
+      <th><%= sortable "created_at", "Sent at" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @deliveries.each do |delivery| %>
+      <tr>
+        <td><%= delivery.email.name %></td>
+        <td><%= delivery.prospect._company_name %></td>
+        <td><%= delivery.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @prospects %>

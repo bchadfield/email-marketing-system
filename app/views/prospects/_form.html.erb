@@ -1,4 +1,26 @@
-<%= form_tag prospects_path, method: :post, multipart: true, class: "pull-left" do |f| %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Upload", class: "btn btn-success" %>
+<h1><%= yield :heading %></h1>
+
+<%= form_for @prospect do |f| %>
+  <div class="row">
+    <div class="well span6">
+      <%= f.label :company_name, "Company" %>
+      <%= f.text_field :company_name, class: "span6" %>
+      <%= f.label :industry_id, "Industry" %>
+      <%= f.collection_select :industry_id, Industry.order("name").all, :id, :name, class: "span6" %>
+      <%= f.label :contact_name, "Contact" %>
+      <%= f.text_field :contact_name, class: "span6" %>
+      <%= f.label :address %>
+      <%= f.text_field :address, class: "span6" %>
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "span6" %>
+      <%= f.label :website %>
+      <%= f.text_field :website, class: "span6" %>
+    </div>
+  </div>
+  
+  <div class="form-actions">
+    <%= link_to "Cancel", prospects_path, class: "btn"%>
+    <%= f.submit "Save", class: "btn btn-primary"%>
+  </div>
+  
 <% end %>

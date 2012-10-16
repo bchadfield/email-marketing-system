@@ -15,8 +15,12 @@ class ProspectsController < ApplicationController
   end
   
   def create
-    created = Prospect.upload(params[:file]) 
-    flash[:notice] = "#{created} prospects were uploaded."  
+    if params[:prospect]
+      @prospect = Prospect.create(params[:prospect])
+    elsif params[:file]
+      created = Prospect.upload(params[:file]) 
+      flash[:notice] = "#{created} prospects were uploaded." 
+    end
     respond_with(@prospect, location: prospects_path) 
   end
    
@@ -40,10 +44,6 @@ class ProspectsController < ApplicationController
   end
   
   private
-    
-    def sort_direction  
-      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"  
-    end 
     
     def sort_column  
       Prospect.column_names.include?(params[:sort]) ? params[:sort] : "company_name"  

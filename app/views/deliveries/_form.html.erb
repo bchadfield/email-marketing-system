@@ -1,0 +1,18 @@
+<h1><%= yield :heading %></h1>
+
+<%= form_for @delivery do |f| %>
+  <div class="row">
+    <div class="well span6">
+      <%= f.label :prospect_id, "Prospect" %>
+      <%= f.collection_select :prospect_id, Prospect.order("company_name").all, :id, :company_name, {}, { class: "span6" } %>
+      <%= f.label :email_id, "Email" %>
+      <%= f.collection_select :email_id, Email.order("name").all, :id, :name, {}, { class: "span6" } %>
+    </div>
+  </div>
+  
+  <div class="form-actions">
+    <%= link_to "Cancel", prospects_path, class: "btn"%>
+    <%= f.submit "Send", class: "btn btn-primary"%>
+  </div>
+  
+<% end %>

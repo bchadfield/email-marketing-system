@@ -1,9 +1,9 @@
 class DeliveriesController < ApplicationController
   respond_to :html, :xml, :json
+  helper_method :sort_direction, :sort_column
 
   def index
-    @delivery = Delivery.new
-    @deliveries = Delivery.all
+    @deliveries = Delivery.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(per_page: 100, page: params[:page])
   end
   
   def show
@@ -16,6 +16,8 @@ class DeliveriesController < ApplicationController
   
   def create
     @delivery = Delivery.new(params[:delivery])
+    body = @delivery.compile_body
+    DeliveryMailer.dynamic_email(body, @delivery.email.subject, @delivery.prospect.email).deliver
     if @delivery.save 
       flash[:notice] = "Successfully created delivery."  
     end  
@@ -40,4 +42,10 @@ class DeliveriesController < ApplicationController
     flash[:notice] = "Successfully destroyed delivery."  
     respond_with(@delivery, location: deliveries_path)
   end
+  
+  private
+    
+    def sort_column  
+      Delivery.column_names.include?(params[:sort]) ? params[:sort] : "prospect_id"  
+    end
 end

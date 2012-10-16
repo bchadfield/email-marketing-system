@@ -1,7 +1,8 @@
 <% title "Prospects" %>
 
+<%= link_to "Add prospect", new_prospect_path, class: "btn btn-success pull-right"%>
 <h1><%= yield :heading %></h1>
-<%= render "form" %>
+<%= render "upload_form" %>
 <%= form_tag prospects_path, method: 'get', class: "form-search pull-right" do %>
     <%= text_field_tag :search, params[:search], class: "input-medium" %>
     <%= submit_tag "Search", class: "btn" %>

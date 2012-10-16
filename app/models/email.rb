@@ -5,4 +5,5 @@ class Email < ActiveRecord::Base
   has_many :deliveries
   
   accepts_nested_attributes_for :email_variables, :allow_destroy => true, :reject_if => proc { |attributes| attributes['identifier'].blank? }
+
 end
