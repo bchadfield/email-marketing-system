@@ -48,6 +48,6 @@ th .current {
   text-indent: 14px;
   background-repeat: no-repeat;   
 }  
- 
+tr.even td { width: 12.5%; }
 
 td.fixed { width: 35%; }

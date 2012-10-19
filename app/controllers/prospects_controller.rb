@@ -3,7 +3,7 @@ class ProspectsController < ApplicationController
   helper_method :sort_direction, :sort_column
 
   def index
-    @prospects = Prospect.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(per_page: 100, page: params[:page])
+    @prospects = Prospect.joins(:industry).search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(per_page: 50, page: params[:page])
   end
   
   def show
@@ -45,7 +45,14 @@ class ProspectsController < ApplicationController
   
   private
     
-    def sort_column  
-      Prospect.column_names.include?(params[:sort]) ? params[:sort] : "company_name"  
+    def sort_column
+      if params[:sort] == "industries.name" 
+        params[:sort]
+      elsif Prospect.column_names.include?(params[:sort])
+        params[:sort]
+      else
+        "company_name"
+      end
+        
     end
 end

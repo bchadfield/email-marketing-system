@@ -15,13 +15,13 @@ class DeliveriesController < ApplicationController
   end
   
   def create
-    @delivery = Delivery.new(params[:delivery])
-    body = @delivery.compile_body
-    DeliveryMailer.dynamic_email(body, @delivery.email.subject, @delivery.prospect.email).deliver
-    if @delivery.save 
-      flash[:notice] = "Successfully created delivery."  
-    end  
-    respond_with(@delivery, location: deliveries_path) 
+    email = params[:email]
+    prospects = params[:prospect].delete_if {|k,v| v == "0"}
+    prospects.each do |prospect|
+      delivery = Delivery.create(prospect_id: prospect[0], email_id: email[0])
+      DeliveryMailer.dynamic_email(delivery.compile_body, delivery.email.subject, delivery.prospect.email).deliver
+    end 
+    redirect_to deliveries_path
   end
    
   def edit

@@ -8,11 +8,13 @@
     <%= submit_tag "Search", class: "btn" %>
 <% end %>
 
+<%= form_tag deliveries_path do %>
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
+      <th></th>
       <th><%= sortable "company_name", "Company" %></th>
-      <th>Industry</th>
+      <th><%= sortable "industries.name", "Industry" %></th>
       <th><%= sortable "contact_name", "Contact" %></th>
       <th><%= sortable "address" %></th>
       <th><%= sortable "email" %></th>
@@ -23,20 +25,20 @@
   <tbody>
     <% @prospects.each do |prospect| %>
       <tr>
+        <td><%= check_box "prospect", prospect.id %>
         <td><%= link_to prospect.company_name, edit_prospect_path(prospect) %></td>
         <td><%= prospect.industry.name %></td>
         <td><%= prospect.contact_name if prospect.contact_name %></td>
         <td><%= prospect.address if prospect.address %></td>
         <td><%= prospect.email if prospect.email %></td>
         <td><%= prospect.website if prospect.website %></td>
-        <td>
-            <% prospect.deliveries.each do |delivery| %>
-              <%= delivery.email.email %><br />
-            <% end %>
-          
-        </td>
+        <td><%= "YES" if prospect.deliveries.size > 0 %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <%= will_paginate @prospects %>
+   <%= select_tag "email", options_from_collection_for_select(Email.order("name").all, "id", "name") %>
+   <%= submit_tag "Send to selected", class: "btn btn-success" %>
+<% end %>
+
